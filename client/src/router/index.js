@@ -1,21 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import CA from '../views/CA_Generate-Key.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView
+      name: 'ca',
+      component: CA
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/sign',
+      name: 'sign',
+      component: () => import('../views/CA_Digital-Sign.vue')
+    },
+    {
+      path: '/validator',
+      name: 'validator',
+      component: () => import('../views/Validator.vue')
     }
   ]
 })
