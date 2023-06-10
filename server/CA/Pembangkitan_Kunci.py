@@ -175,21 +175,30 @@ def enkripsihex(d, N, cipher):
 
 def writeKey(filename):
     keySize = 1024
-    e, d, N = generateKeys(keySize)
+    e, d, N = generateKeys(keySize) 
 
-    if os.path.exists(f'{filename}.pub') or os.path.exists(f'{filename}.pri'):
-        return 'WARNING: The file already exists! Use a different name or delete these files and re-run this program.'
+    publicKey = f"{keySize},{N},{e}"
+    privateKey = f"{keySize},{N},{d}"
 
-    pub_key_content = f'{keySize},{N},{e}'
-    pri_key_content = f'{keySize},{N},{d}'
+    return publicKey, privateKey
 
-    response = jsonify({'public_key': pub_key_content, 'private_key': pri_key_content})
-    response.headers.set('Content-Disposition', 'attachment', filename=f'{filename}.pub')
+# def writeKey(filename):
+#     keySize = 1024
+#     e, d, N = generateKeys(keySize)
 
-    response_pri = jsonify({'private_key': pri_key_content})
-    response_pri.headers.set('Content-Disposition', 'attachment', filename=f'{filename}.pri')
+#     if os.path.exists(f'{filename}.pub') or os.path.exists(f'{filename}.pri'):
+#         return 'WARNING: The file already exists! Use a different name or delete these files and re-run this program.'
 
-    return response, response_pri
+#     pub_key_content = f'{keySize},{N},{e}'
+#     pri_key_content = f'{keySize},{N},{d}'
+
+#     response = jsonify({'public_key': pub_key_content, 'private_key': pri_key_content})
+#     response.headers.set('Content-Disposition', 'attachment', filename=f'{filename}.pub')
+
+#     response_pri = jsonify({'private_key': pri_key_content})
+#     response_pri.headers.set('Content-Disposition', 'attachment', filename=f'{filename}.pri')
+
+#     return response, response_pri
 
 
 # def maintest():

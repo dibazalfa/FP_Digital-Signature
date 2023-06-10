@@ -20,28 +20,26 @@ from Baca_File import *
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/api/key', methods=['POST'])
-def genkey():
-    data = request.json
-    q = data['q']
-    # filename = request.args.get('q')
-    filename = q
-    writeKey(filename) 
-    return jsonify({'message': 'Key generated successfully'})
-    
-    #ini dari pembangkitan_kunci.py
-    # self.popupnotifbiasa("Kunci telah berhasil dibuat")
-
 @app.route('/api/data', methods=['POST'])
-def handle_data():
+def get_data():
     data = request.json
+    # key = data['q']
+    key = data.get('q')
+    print(key)
 
-    # Lakukan pemrosesan data di sini
-    # ...
+    publickKey, privateKey = writeKey(key)
 
-    # Kirim tanggapan kembali ke sisi client jika diperlukan
-    response = {'message': 'Data received and processed successfully'}
-    return jsonify(response)
+    # print("public:", publickKey)
+    # print("private:", privateKey)
+
+    # message = {'message': 'Hello from Python server!'}
+    message = {
+        'key': key,
+        'publicKey' : publickKey,
+        'privateKey' : privateKey, 
+        'message': 'Hello from Python server!'
+    }
+    return jsonify(message)
 
 if __name__ == '__main__':
     app.run()

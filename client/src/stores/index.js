@@ -1,87 +1,71 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-const URL_API = "http://localhost:5000";
+// const URL_API = "http://localhost:5000";
 
 export const useApp = defineStore({
   id: "App",
   state: () => ({
       key: "",
+      publicKey: "",
+      privateKey: "",
   }),
   actions: {
-      // generateKey() {
-      //   const q = this.key;
-      //   console.log(this.key);
-      //   fetch(`http://localhost:3000/api/key?q=${q}`)
-      //     .then((response) => response.json())
-      //     .then((data) => {
-
-      //     })
-      //     .catch((error) => {
-      //       console.error(error)
-      //     })
-      // }
-
-      async generateKey() {
-        const q = this.key
-        try {
-          const { data } = 
-            await axios.post(URL_API + `/api/key?q=${q}`, 
-            { headers: { 'Content-Type': 'application/json' } }
-          );
-        } catch (error) {
-          console.log(error);
-        }
-      },
-
-      sendDataToServer() {
-        const data = {
-          // Data yang ingin dikirim ke server
-          halo: "halo"
-        };
-    
-        axios.post('http://localhost:5000/api/data', data)
-          .then(response => {
-            // Tanggapan dari server jika diperlukan
-          })
-          .catch(error => {
-            // Tangani kesalahan jika ada
-          });
+    async generateKey() {
+      const q = this.key;
+      // console.log(q);
+      
+      try {
+        const response = await axios.post('http://localhost:5000/api/data', { q });
+        console.log(response.data.key); // Tanggapan dari server
+        this.getData();
+      } catch (error) {
+        console.log(error);
       }
+    },
+    async getData() {
+      console.log("halo ini get data")
+      try {
+        await axios.post('http://localhost:5000/api/data', {q: 'key'})
+          .then(response => {
+            this.publicKey = response.data.publicKey;
+            this.privateKey = response.data.privateKey;
+          })
+           // Membuat file teks
+          const publicKeyBlob = new Blob([this.publicKey], { type: 'text/plain' });
+          const privateKeyBlob = new Blob([this.privateKey], { type: 'text/plain' });
 
-      // async generateKey() {
-      //   const q = this.key;
-      //   try {
-      //     const { data } = await axios.post(
-      //       URL_API + '/api/key',
-      //       { q },
-      //       { headers: { 'Content-Type': 'application/json' } }
-      //     );
-      
-      //     // Tangani respons dari server
-      //     const public_key_content = data.public_key;
-      //     const private_key_content = data.private_key;
-      
-      //     // Inisiasi unduhan file .pub
-      //     const pubBlob = new Blob([public_key_content], { type: 'text/plain' });
-      //     const pubLink = document.createElement('a');
-      //     pubLink.href = URL.createObjectURL(pubBlob);
-      //     pubLink.download = 'public_key.pub';
-      //     pubLink.click();
-      
-      //     // Inisiasi unduhan file .pri (jika diperlukan)
-      //     if (private_key_content) {
-      //       const priBlob = new Blob([private_key_content], { type: 'text/plain' });
-      //       const priLink = document.createElement('a');
-      //       priLink.href = URL.createObjectURL(priBlob);
-      //       priLink.download = 'private_key.pri';
-      //       priLink.click();
-      //     }
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // }
-      
+          // Membuat URL objek blob
+          const publicKeyURL = window.URL.createObjectURL(publicKeyBlob);
+          const privateKeyURL = window.URL.createObjectURL(privateKeyBlob);
 
+          // Membuat elemen anchor untuk mengunduh file
+          const publicKeyLink = document.createElement('a');
+          publicKeyLink.href = publicKeyURL;
+          publicKeyLink.download = this.key + '.pub';
+
+          const privateKeyLink = document.createElement('a');
+          privateKeyLink.href = privateKeyURL;
+          privateKeyLink.download = this.key + '.pri';
+
+          // Menyembunyikan elemen anchor dan mengkliknya
+          publicKeyLink.style.display = 'none';
+          privateKeyLink.style.display = 'none';
+          document.body.appendChild(publicKeyLink);
+          document.body.appendChild(privateKeyLink);
+
+          publicKeyLink.click();
+          privateKeyLink.click();
+
+          // Menghapus URL objek blob
+          window.URL.revokeObjectURL(publicKeyURL);
+          window.URL.revokeObjectURL(privateKeyURL);
+
+          // console.log("Public Key:", this.publicKey);
+          // console.log("Private Key:", this.privateKey);
+      } catch (error) {
+        console.log(error)
+      }
+    }
   }
 })

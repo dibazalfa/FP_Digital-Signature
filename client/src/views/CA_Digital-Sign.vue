@@ -14,6 +14,8 @@
       <label>Private Key</label>
       <input type="text">
       <button>Browse</button>
+      <br>
+      <button>Sign File</button>
     </div>
   </div>
 </template>
