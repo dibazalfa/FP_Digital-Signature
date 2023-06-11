@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/validator',
       name: 'validator',
       component: () => import('../views/Validator.vue')
+    },
+    {
+      path: '/generate',
+      name: 'generate',
+      component: () => import('../views/GenerateKey.vue')
     }
   ]
 })

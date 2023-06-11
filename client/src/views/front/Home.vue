@@ -25,7 +25,7 @@
       <!-- card -->
       <div class="my-32">
         <div
-          class="max-w-4xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md"
+          class="max-w-4xl px-8 py-4 mx-auto bg-white rounded-lg shadow-md "
           style="cursor: auto"
         >
           <div class="flex justify-center">
@@ -56,11 +56,11 @@
             >
         </div>
         <div class="flex justify-center mt-6">
-            <button
-              class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-4 px-48 rounded-full text-2xl"
+            <a href="/generate"
+              class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-4 px-32 rounded-full text-2xl"
             >
               Let's Started
-            </button>
+            </a>
 
         </div>
           <div class="mt-2">
