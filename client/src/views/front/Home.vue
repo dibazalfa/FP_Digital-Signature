@@ -57,7 +57,7 @@
         </div>
         <div class="flex justify-center mt-6">
             <a href="/generate"
-              class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-4 px-32 rounded-full text-2xl"
+              class="bg-[#b67998] hover:bg-[#c08c9f] text-white font-bold py-4 px-32 rounded-full text-2xl"
             >
               Let's Started
             </a>
@@ -77,6 +77,9 @@
         </div>
       </div>
     </div>
+    <!-- img -->
+    <img src="../../assets/love.gif" alt="hi" class="w-64 block my-[100px] ml-[1200px] ">
+    
   </div>
 </template>
 

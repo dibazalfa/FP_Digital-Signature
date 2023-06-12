@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/generate',
       name: 'generate',
       component: () => import('../views/GenerateKey.vue')
+    },
+    {
+      path: '/ds',
+      name: 'ds',
+      component: () => import('../views/DigitalSign.vue')
     }
   ]
 })
