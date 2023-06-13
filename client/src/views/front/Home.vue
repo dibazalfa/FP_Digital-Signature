@@ -56,11 +56,11 @@
             >
         </div>
         <div class="flex justify-center mt-6">
-            <button
+            <a href="/generate"
               class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-4 px-48 rounded-full text-2xl"
             >
               Let's Started
-            </button>
+            </a>
 
         </div>
           <div class="mt-2">
