@@ -9,9 +9,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
-from Tanda_Tangan import *
-from Pembangkitan_Kunci import *
-from Baca_File import *
+from Val_Tanda_Tangan import *
+from Val_Pembangkitan_Kunci import *
+from Val_Baca_File import *
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):

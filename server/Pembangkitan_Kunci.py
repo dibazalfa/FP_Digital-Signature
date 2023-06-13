@@ -159,38 +159,14 @@ def enkripsihex(d, N, cipher):
     # print (f"c : {c}")
     return text
 
-# def writeKey(filename):
-#     keySize = 1024
-#     e, d, N = generateKeys(keySize) 
-#     if os.path.exists('%s.pub' % (filename)) or os.path.exists('%s.pri' % (filename)):
-#         sys.exit('WARNING: The file %s.pub or %s,.pri already exists! Use a different name or delete these files and re-run this program.' % (filename, filename))
-
-#     fo = open('%s.pub' % (filename), 'w')
-#     fo.write('%s,%s,%s' % (keySize, N, e))
-#     fo.close()
-
-#     fo = open('%s.pri' % (filename), 'w')
-#     fo.write('%s,%s,%s' % (keySize, N, d))
-#     fo.close()
-
 def writeKey(filename):
     keySize = 1024
-    e, d, N = generateKeys(keySize)
+    e, d, N = generateKeys(keySize) 
 
-    if os.path.exists(f'{filename}.pub') or os.path.exists(f'{filename}.pri'):
-        return 'WARNING: The file already exists! Use a different name or delete these files and re-run this program.'
+    publicKey = f"{keySize},{N},{e}"
+    privateKey = f"{keySize},{N},{d}"
 
-    pub_key_content = f'{keySize},{N},{e}'
-    pri_key_content = f'{keySize},{N},{d}'
-
-    response = jsonify({'public_key': pub_key_content, 'private_key': pri_key_content})
-    response.headers.set('Content-Disposition', 'attachment', filename=f'{filename}.pub')
-
-    response_pri = jsonify({'private_key': pri_key_content})
-    response_pri.headers.set('Content-Disposition', 'attachment', filename=f'{filename}.pri')
-
-    return response, response_pri
-
+    return publicKey, privateKey
 
 # def maintest():
 #     print("RSA")

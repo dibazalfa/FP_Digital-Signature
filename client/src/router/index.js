@@ -23,6 +23,11 @@ const router = createRouter({
       path: '/validator',
       name: 'validator',
       component: () => import('../views/Validator.vue')
+    },
+    {
+      path: '/coba',
+      name: 'coba',
+      component: () => import('../views/coba.vue')
     }
   ]
 })
