@@ -2,6 +2,8 @@ import hashlib
 import Baca_File
 import Pembangkitan_Kunci
 import zipfile
+import pathlib
+import os
 
 
 def hashText(text):
@@ -24,10 +26,25 @@ def generateDigitalSigned(filename, privatekey_filename):
     if Baca_File.fileext(filename) == ".txt":
         Baca_File.appendfile(new_signature, filename)
 
+    # Mendapatkan direktori "Downloads"
+    downloads_directory = os.path.expanduser("~/Downloads")
+
+    # Membuat path absolut ke file kunci private
+    kunci_pri_path = pathlib.Path(os.path.join(downloads_directory, privatekey_filename))
+
+    # Membuat path absolut ke file kunci publik
+    kunci_pub_path = kunci_pri_path.with_suffix('.pub')
+
+    # print(kunci_pri_path)
+    # print(kunci_pub_path)
+
     signed_zip_filename = 'Tanda_Tangan.zip'
     with zipfile.ZipFile(signed_zip_filename, 'w') as myzip:
         myzip.write(filename)
-        myzip.write(privatekey_filename)
+        # myzip.write('%s.pub' % (Baca_File.name((privatekey_filename))))
+        # myzip.write(str(kunci_pub_path))
+        myzip.write(kunci_pub_path, os.path.basename(kunci_pub_path))
+        # myzip.write(privatekey_filename)
         myzip.writestr('signature.txt', new_signature)
 
     return signed_zip_filename
