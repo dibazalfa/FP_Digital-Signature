@@ -11,6 +11,7 @@ export const useApp = defineStore({
     privateKey: '',
     file: null,
     privatekey: null,
+    publicKey: null,
     isSubmitted: false,
   }),
   actions: {
@@ -85,35 +86,11 @@ export const useApp = defineStore({
       try {
         const formData = new FormData();
         formData.append('filename', this.file);
-        formData.append('publicKey', this.publicKey);
-        formData.append('publicKey', this.publicKey);
+        formData.append('privatekey', this.privatekey);
         console.log(this.file);
-        console.log(this.publicKey);
-        console.log(this.publicKey);
+        console.log(this.privatekey);
 
         const response = await axios.post('http://localhost:5000/api/sign', formData);
-        const { message, signed_filename } = response.data;
-        console.log(signed_filename);
-        if (signed_filename) {
-          alert(message);
-          this.isSubmitted = true;
-        } else {
-          console.log('Gagal menandatangani file:', message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async submitvalidator() {
-      try {
-        const formData = new FormData();
-        formData.append('filename', this.file);
-        formData.append('privatekey', this.privatekey);
-        formData.append('Sign', this.Sign);
-        console.log(this.file);
-        console.log(this.Sign);
-
-        const response = await axios.post('http://localhost:5000/api/validation', formData);
         const { message, signed_filename } = response.data;
         console.log(signed_filename);
         if (signed_filename) {
@@ -126,6 +103,30 @@ export const useApp = defineStore({
         console.log(error);
       }
     },
+    async submitvalidator() {
+      try {
+        const formData = new FormData();
+        formData.append('filename', this.file);
+        formData.append('publicKey', this.publicKey);
+        formData.append('Sign', this.Sign);
+        console.log(this.file);
+        console.log(this.publicKey);
+        console.log(this.Sign);
+
+        const response = await axios.post('http://localhost:5000/api/validation', formData);
+        const { message, error } = response.data;
+
+        if (error) {
+          alert(error);
+        } else {
+          alert(message);
+          this.isSubmitted = true;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     inputPublicKey(publicKey) {
       if (publicKey) {
         console.log('publicKey key dipilih:', publicKey.name);
