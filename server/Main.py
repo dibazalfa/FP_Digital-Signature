@@ -78,17 +78,17 @@ def valid_sign():
     publicKey_filename = secure_filename(publicKey.filename)
     publicKey.save(publicKey_filename)
 
-    siganture_filename = secure_filename(signature.filename)
-    signature.save(siganture_filename)
+    signature_filename = secure_filename(signature.filename)
+    signature.save(signature_filename)
 
-    validation_file = validateDigitalSigned(filename_ori, publicKey_filename, siganture_filename)
+    validation_file = validateDigitalSigned(filename_ori, publicKey_filename, signature_filename)
 
     # Hapus file sementara setelah digunakan
-    os.remove(filename_ori)
-    os.remove(publicKey_filename)
-    os.remove(siganture_filename)
+    # os.remove(filename_ori)
+    # os.remove(publicKey_filename)
+    # os.remove(siganture_filename)
 
-    return jsonify({'message': 'File valid'})
+    return jsonify({'message': validation_file})
 
 if __name__ == '__main__':
     app.run()

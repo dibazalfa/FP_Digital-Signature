@@ -68,6 +68,10 @@ def validateDigitalSigned(filename, publickey, filesig=""):
         digests += str(ord(c))
     hexdigest = hex(int(digests))
     if hexdigest == signatureDigest:
-        return("Valid")
+        response = "Valid"
+        return(response)
+        # print("Valid")
     else: 
-        return("Tidak Valid")
+        response = "Tidak Valid"
+        return(response)
+        # print("Tidak Valid")
