@@ -57,6 +57,9 @@ def sign_file():
 
     return jsonify({'message': 'File berhasil ditandatangani', 'signed_filename': signed_zip_filename})
 
+# @app.route('/api/validation', methods=['POST'])
+# def valid_sign():
+
 
 if __name__ == '__main__':
     app.run()
