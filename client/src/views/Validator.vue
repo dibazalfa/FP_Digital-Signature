@@ -10,17 +10,14 @@
       <label>File Input</label>
       <input type="text">
       <button>Browse</button>
-      <!-- <input type="file" ref="fileInput" @change="App.handleFileChange"> -->
-      <!-- <button @click="App.uploadFile()">Unggah</button>  -->
-      
       <br>
       <label>File Key</label>
       <input type="text">
-      <button>Browse</button> 
+      <button>Browse</button>
       <br>
       <label>File Sign</label>
       <input type="text">
-      <button>Browse</button> 
+      <button>Browse</button>
       
     </div>
   </div>
