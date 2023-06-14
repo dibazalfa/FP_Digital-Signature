@@ -2,6 +2,8 @@ import hashlib
 import Baca_File
 import Pembangkitan_Kunci
 import zipfile
+import pathlib
+import os
 
 
 def hashText(text):
@@ -24,11 +26,30 @@ def generateDigitalSigned(filename, privatekey_filename):
     if Baca_File.fileext(filename) == ".txt":
         Baca_File.appendfile(new_signature, filename)
 
-    signed_zip_filename = 'Tanda_Tangan.zip'
+    # Simpan new_signature dalam file teks dengan nama yang sama dengan filename
+    signature_filename = filename.split(".")[0] + "_signature.txt"
+    Baca_File.writefile(new_signature, signature_filename)
+
+    # Mendapatkan direktori "Downloads"
+    downloads_directory = os.path.expanduser("~/Downloads")
+
+    # Membuat path absolut ke file kunci private
+    kunci_pri_path = pathlib.Path(os.path.join(downloads_directory, privatekey_filename))
+
+    # Membuat path absolut ke file kunci publik
+    kunci_pub_path = kunci_pri_path.with_suffix('.pub')
+
+    # print(kunci_pri_path)
+    # print(kunci_pub_path)
+
+    signed_zip_filename = filename.split(".")[0] + ".zip"
     with zipfile.ZipFile(signed_zip_filename, 'w') as myzip:
         myzip.write(filename)
-        myzip.write(privatekey_filename)
-        myzip.writestr('signature.txt', new_signature)
+        # myzip.write('%s.pub' % (Baca_File.name((privatekey_filename))))
+        myzip.write(kunci_pub_path, os.path.basename(kunci_pub_path))
+        # myzip.writestr('signature.txt', new_signature)
+        myzip.write(signature_filename)
+
 
     return signed_zip_filename
 
@@ -47,6 +68,10 @@ def validateDigitalSigned(filename, publickey, filesig=""):
         digests += str(ord(c))
     hexdigest = hex(int(digests))
     if hexdigest == signatureDigest:
-        return("Valid")
+        response = "Valid"
+        return(response)
+        # print("Valid")
     else: 
-        return("Tidak Valid")
+        response = "Tidak Valid"
+        return(response)
+        # print("Tidak Valid")

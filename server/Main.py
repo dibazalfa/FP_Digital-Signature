@@ -57,6 +57,38 @@ def sign_file():
 
     return jsonify({'message': 'File berhasil ditandatangani', 'signed_filename': signed_zip_filename})
 
+@app.route('/api/validation', methods=['POST'])
+def valid_sign():
+    file = request.files['filename']
+    publicKey = request.files['publicKey']
+    signature = request.files['Sign']
+
+    if file.filename == ""  or publicKey.filename == "" or signature.filename == "":
+          return jsonify({'error': 'File, public key, dan sign tidak boleh kosong!'})
+    elif not file.filename.endswith(".pdf"):
+        return jsonify({'error': 'File harus dalam format .pdf'})
+    elif not signature.filename.endswith(".txt"):
+        return jsonify({'error': 'File harus dalam format .txt'})
+    elif not publicKey.filename.endswith(".pub"):
+        return jsonify({'error': 'Masukkan kunci private (dengan file .pub)'})
+    
+    filename_ori = secure_filename(file.filename)
+    file.save(filename_ori)
+
+    publicKey_filename = secure_filename(publicKey.filename)
+    publicKey.save(publicKey_filename)
+
+    signature_filename = secure_filename(signature.filename)
+    signature.save(signature_filename)
+
+    validation_file = validateDigitalSigned(filename_ori, publicKey_filename, signature_filename)
+
+    # Hapus file sementara setelah digunakan
+    # os.remove(filename_ori)
+    # os.remove(publicKey_filename)
+    # os.remove(siganture_filename)
+
+    return jsonify({'message': validation_file})
 
 if __name__ == '__main__':
     app.run()

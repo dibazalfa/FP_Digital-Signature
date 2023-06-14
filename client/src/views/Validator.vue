@@ -8,26 +8,23 @@
 
       <!-- untuk upload file .pdf -->
       <label>File Input</label>
-      <input type="text">
-      <button>Browse</button>
+      <input type="file" ref="fileInput" @change="App.inputFile($event.target.files[0])" />
       <!-- <input type="file" ref="fileInput" @change="App.handleFileChange"> -->
       <!-- <button @click="App.uploadFile()">Unggah</button>  -->
-      
-      <br>
+
+      <br />
       <label>File Key</label>
-      <input type="text">
-      <button>Browse</button> 
-      <br>
+      <input type="file" ref="privateKeyInput" @change="App.inputPublicKey($event.target.files[0])" />
+      <br />
       <label>File Sign</label>
-      <input type="text">
-      <button>Browse</button> 
-      
+      <input type="file" ref="privateKeyInput" @change="App.inputSign($event.target.files[0])" />
     </div>
+    <button @click="App.submitvalidator">Submit</button>
   </div>
 </template>
 
 <script>
-import { useApp } from "../stores/index";
+import { useApp } from '../stores/index';
 export default {
   setup() {
     const App = useApp();
@@ -35,8 +32,6 @@ export default {
       App,
     };
   },
-  mounted() {
-    
-  }
+  mounted() {},
 };
 </script>
