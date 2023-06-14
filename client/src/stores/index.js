@@ -11,6 +11,7 @@ export const useApp = defineStore({
     privateKey: '',
     file: null,
     privatekey: null,
+    publicKey: null,
     isSubmitted: false,
   }),
   actions: {
@@ -96,11 +97,55 @@ export const useApp = defineStore({
           alert(message);
           this.isSubmitted = true;
         } else {
-          console.log('Gagal menandatangani file:', message);
+          console.log('Signed file not falid');
         }
       } catch (error) {
         console.log(error);
       }
+    },
+    async submitvalidator() {
+      try {
+        const formData = new FormData();
+        formData.append('filename', this.file);
+        formData.append('publicKey', this.publicKey);
+        formData.append('Sign', this.Sign);
+        console.log(this.file);
+        console.log(this.publicKey);
+        console.log(this.Sign);
+
+        const response = await axios.post('http://localhost:5000/api/validation', formData);
+        const { message, error } = response.data;
+
+        if (error) {
+          alert(error);
+        } else {
+          alert(message);
+          this.isSubmitted = true;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    inputPublicKey(publicKey) {
+      if (publicKey) {
+        console.log('publicKey key dipilih:', publicKey.name);
+        this.publicKey = publicKey;
+      }
+    },
+    browsePublicKey() {
+      const publicKeyInput = document.querySelectorAll('input[type="file"]')[1];
+      publicKeyInput.click();
+    },
+    inputSign(Sign) {
+      if (Sign) {
+        console.log('Sign key dipilih:', Sign.name);
+        this.Sign = Sign;
+      }
+    },
+    browseSign() {
+      const inputSign = document.querySelectorAll('input[type="file"]')[1];
+      inputSign.click();
     },
   },
 });
