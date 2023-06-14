@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 // const URL_API = "http://localhost:5000";
 
@@ -94,10 +95,18 @@ export const useApp = defineStore({
         const { message, signed_filename } = response.data;
         console.log(signed_filename);
         if (signed_filename) {
-          alert(message);
+          // alert(message);
+          Swal.fire({
+            icon:  'success',
+            title: message,
+          })
           this.isSubmitted = true;
         } else {
-          console.log('Signed file not falid');
+          // console.log('Signed file not falid');
+          Swal.fire({
+            icon:  'error',
+            title:  'Gagal Menandatangani File'
+          })
         }
       } catch (error) {
         console.log(error);
@@ -119,7 +128,10 @@ export const useApp = defineStore({
         if (error) {
           alert(error);
         } else {
-          alert(message);
+          // alert(message);
+          Swal.fire({
+            title:  message,
+          })
           this.isSubmitted = true;
         }
       } catch (error) {
