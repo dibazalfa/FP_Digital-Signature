@@ -1,43 +1,31 @@
 <template>
-  <div
-    class="h-screen bg-gradient-to-r from-[#f7b1af] via-[#ecbac4] to-[#d48399]"
-  >
-    <div class="w-full flex items-center sm:items-center">
-      <div class="flex my-10 mx-12">
-        <a
-          href="/"
-          class="flex bg-red-400 hover:bg-rose-500 text-white py-2 p-5 justify-center rounded-full text-2xl hover:text-slate-100 items-center"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 mr-2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-            />
-          </svg>
-
-          Home
-        </a>
-      </div>
-      <nav class="flex items-center sm:mx-24 lg:mx-[420px] md:mx-56">
+  <div class="bg-[#EFEAEA] h-screen">
+    <div
+      class="w-full bg-cover bg-no-repeat bg-top h-96 sm:bg-cover"
+      style="
+        background-image: url(https://i.pinimg.com/564x/17/c4/3b/17c43b7d48bae5baab2cdcb798c8cf6c.jpg);
+      "
+    >
+      <nav class="flex flex-wrap items-center mx-24 justify-center">
+        <div class="flex my-12">
+          <!-- <img
+            class="w-full cursor-pointer"
+            src="../assets/sora.png"
+            alt="logo"
+            @click="$router.push(`/`)"
+          /> -->
+        </div>
         <ul class="text-white">
-          <div class="flex text-2xl">
+          <div class="flex text-2xl gap-4">
+            <item name="Home" path="/" />
             <item name="Generate" path="/generate" />
             <item name="Validator" path="/validator" />
           </div>
         </ul>
       </nav>
-    </div>
 
     <!-- card -->
-    <div class="my-5">
+    <div class="my-10">
       <div
         class="max-w-4xl h-[500px] px-8 py-10 mx-auto bg-white rounded-lg shadow-md"
         style="cursor: auto"
@@ -139,6 +127,7 @@
           />
         </div>
       </div>
+    </div>
     </div>
   </div>
 </template>

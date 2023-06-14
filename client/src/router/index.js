@@ -33,6 +33,11 @@ const router = createRouter({
       path: '/ds',
       name: 'ds',
       component: () => import('../views/DigitalSign.vue')
+    },
+    {
+      path: '/coba',
+      name: 'coba',
+      component: () => import('../views/coba.vue')
     }
   ]
 })
