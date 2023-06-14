@@ -14,11 +14,11 @@ const router = createRouter({
       name: 'about',
       component: () => import('../views/front/About.vue')
     },
-    {
-      path: '/sign',
-      name: 'sign',
-      component: () => import('../views/CA_Digital-Sign.vue')
-    },
+    // {
+    //   path: '/sign',
+    //   name: 'sign',
+    //   component: () => import('../views/CA_Digital-Sign.vue')
+    // },
     {
       path: '/validator',
       name: 'validator',
@@ -27,8 +27,23 @@ const router = createRouter({
     {
       path: '/generate',
       name: 'generate',
-      component: () => import('../views/CA_Generate-Key.vue')
-    }
+      component: () => import('../views/GenerateKey.vue')
+    },
+    {
+      path: '/ds',
+      name: 'ds',
+      component: () => import('../views/DigitalSign.vue')
+    },
+    // {
+    //   path: '/coba',
+    //   name: 'coba',
+    //   component: () => import('../views/coba.vue')
+    // },
+    // {
+    //   path: '/generate',
+    //   name: 'generate',
+    //   component: () => import('../views/CA_Generate-Key.vue')
+    // }
   ]
 })
 

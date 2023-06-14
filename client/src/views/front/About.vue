@@ -7,7 +7,7 @@
       "
     >
       <nav class="flex flex-wrap items-center mx-24 justify-center">
-        <div class="flex my-10">
+        <div class="flex my-12">
           <!-- <img
             class="w-full cursor-pointer"
             src="../assets/sora.png"
