@@ -6,14 +6,18 @@
         background-image: url(https://i.pinimg.com/564x/17/c4/3b/17c43b7d48bae5baab2cdcb798c8cf6c.jpg);
       "
     >
-      <nav class="flex flex-wrap items-center mx-24 justify-center">
-        <div class="flex my-12">
-          <!-- <img
-            class="w-full cursor-pointer"
-            src="../assets/sora.png"
-            alt="logo"
-            @click="$router.push(`/`)"
-          /> -->
+    <nav class="flex flex-wrap items-center mx-24 justify-center">
+      <div class=" my-12">
+<!--         
+        <div class="flex">
+          <img
+                  class="w-20  cursor-pointer"
+                  src="../../assets/logo.png"
+                  alt="logo"
+                  @click="$router.push(`/`)"
+                />
+    
+        </div> -->
         </div>
         <ul class="text-white">
           <div class="flex text-2xl gap-4">
