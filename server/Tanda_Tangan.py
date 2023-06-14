@@ -26,6 +26,10 @@ def generateDigitalSigned(filename, privatekey_filename):
     if Baca_File.fileext(filename) == ".txt":
         Baca_File.appendfile(new_signature, filename)
 
+    # Simpan new_signature dalam file teks dengan nama yang sama dengan filename
+    signature_filename = filename.split(".")[0] + "_signature.txt"
+    Baca_File.writefile(new_signature, signature_filename)
+
     # Mendapatkan direktori "Downloads"
     downloads_directory = os.path.expanduser("~/Downloads")
 
@@ -38,14 +42,14 @@ def generateDigitalSigned(filename, privatekey_filename):
     # print(kunci_pri_path)
     # print(kunci_pub_path)
 
-    signed_zip_filename = 'Tanda_Tangan.zip'
+    signed_zip_filename = filename.split(".")[0] + ".zip"
     with zipfile.ZipFile(signed_zip_filename, 'w') as myzip:
         myzip.write(filename)
         # myzip.write('%s.pub' % (Baca_File.name((privatekey_filename))))
-        # myzip.write(str(kunci_pub_path))
         myzip.write(kunci_pub_path, os.path.basename(kunci_pub_path))
-        # myzip.write(privatekey_filename)
-        myzip.writestr('signature.txt', new_signature)
+        # myzip.writestr('signature.txt', new_signature)
+        myzip.write(signature_filename)
+
 
     return signed_zip_filename
 
