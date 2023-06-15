@@ -93,7 +93,19 @@
                 </div>
               </div>
             </div>
-
+ <--    <div class="">
+        <div class=" mx-10 md:max-w-3xl my-20 lg:p-12 lg:flex-1">
+          <h3 class="text-xl font-bold text-slate-800 md:text-5xl ml-40"> Our Mission </h3>
+            <p class="mt-2 text-slate-600 sm:mt-4 sm:text-xl text-justify py-5">
+              kita pasti bisa mendapatkan nilai A dari bapaknya, bismillah nilai
+              A jadi kita harus semangata mengejrkans kdiandkas kita pasti bisa
+              mendapatkan nilai A dari bapaknya, bismillah nilai A jadi kita
+              harus semangata mengejrkans kdiandkas kita pasti bisa mendapatkan
+              nilai A dari bapaknya, bismillah nilai A jadi kita harus semangata
+              mengejrkans kdiandkas
+            </p>
+        </div>
+      </div>-->
             
 
           </div>
